@@ -1,72 +1,141 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const content = document.getElementById('notebook-content');
-    const fontSelect = document.getElementById('font-select');
-    const penColor = document.getElementById('pen-color');
-    const penSize = document.getElementById('pen-size');
-    const clearBtn = document.getElementById('clear-btn');
-    const printBtn = document.getElementById('print-btn');
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-    // Load saved content if available
-    if (localStorage.getItem('notebookContent')) {
-        content.innerHTML = localStorage.getItem('notebookContent');
-    }
+:root {
+    --paper-color: #f9f7e8;
+    --line-color: rgba(0, 0, 0, 0.1);
+    --margin-color: rgba(0, 0, 255, 0.2);
+    --vertical-line-color: rgba(0, 0, 255, 0.1);
+    --pen-color: #1a73e8;
+}
 
-    // Font selection
-    fontSelect.addEventListener('change', function() {
-        content.style.fontFamily = this.value;
-        saveContent();
-    });
+body {
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
 
-    // Pen color
-    penColor.addEventListener('input', function() {
-        content.style.color = this.value;
-        document.documentElement.style.setProperty('--pen-color', this.value);
-        saveContent();
-    });
+.notebook-container {
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
 
-    // Pen size (font size)
-    penSize.addEventListener('input', function() {
-        content.style.fontSize = `${this.value}px`;
-        content.style.lineHeight = `${parseInt(this.value) + 10}px`;
-        saveContent();
-    });
+.toolbar {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
 
-    // Clear button
-    clearBtn.addEventListener('click', function() {
-        if (confirm('Are you sure you want to clear the page?')) {
-            content.innerHTML = '';
-            saveContent();
-        }
-    });
+.tool-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
-    // Print button
-    printBtn.addEventListener('click', function() {
-        window.print();
-    });
+.tool-group label {
+    font-weight: bold;
+    font-size: 14px;
+}
 
-    // Auto-save content
-    content.addEventListener('input', saveContent);
+button {
+    padding: 8px 15px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
 
-    function saveContent() {
-        localStorage.setItem('notebookContent', content.innerHTML);
-    }
+button:hover {
+    background-color: #0d5bba;
+}
 
-    // Set initial values from localStorage
-    if (localStorage.getItem('fontFamily')) {
-        content.style.fontFamily = localStorage.getItem('fontFamily');
-        fontSelect.value = localStorage.getItem('fontFamily');
+.notebook-paper {
+    position: relative;
+    background-color: var(--paper-color);
+    min-height: 70vh;
+    padding: 40px 60px;
+    border-radius: 0 0 5px 5px;
+}
+
+.margin-line {
+    position: absolute;
+    left: 40px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: var(--margin-color);
+}
+
+.vertical-lines {
+    position: absolute;
+    top: 0;
+    left: 60px;
+    right: 0;
+    bottom: 0;
+    background-image: repeating-linear-gradient(
+        to right,
+        transparent,
+        transparent 39px,
+        var(--vertical-line-color) 40px
+    );
+    z-index: 0;
+}
+
+.horizontal-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: repeating-linear-gradient(
+        var(--paper-color),
+        var(--paper-color) 39px,
+        var(--line-color) 40px
+    );
+    z-index: 0;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    font-family: 'Caveat', cursive;
+    font-size: 24px;
+    line-height: 40px;
+    color: var(--pen-color);
+    outline: none;
+    min-height: 100%;
+}
+
+@media print {
+    .toolbar {
+        display: none;
     }
     
-    if (localStorage.getItem('penColor')) {
-        content.style.color = localStorage.getItem('penColor');
-        penColor.value = localStorage.getItem('penColor');
-        document.documentElement.style.setProperty('--pen-color', localStorage.getItem('penColor'));
+    .notebook-paper {
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
     }
-    
-    if (localStorage.getItem('fontSize')) {
-        const size = localStorage.getItem('fontSize');
-        content.style.fontSize = size;
-        content.style.lineHeight = `${parseInt(size) + 10}px`;
-        penSize.value = parseInt(size);
-    }
-});
+}
+
+@font-face {
+    font-family: 'CustomFont';
+    src: url('custom-font.woff2') format('woff2'),
+         url('custom-font.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
