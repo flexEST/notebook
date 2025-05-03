@@ -8,6 +8,7 @@
     --paper-color: #f9f7e8;
     --line-color: rgba(0, 0, 0, 0.1);
     --margin-color: rgba(0, 0, 255, 0.2);
+    --vertical-line-color: rgba(0, 0, 255, 0.1);
     --pen-color: #1a73e8;
 }
 
@@ -78,6 +79,21 @@ button:hover {
     background-color: var(--margin-color);
 }
 
+.vertical-lines {
+    position: absolute;
+    top: 0;
+    left: 60px;
+    right: 0;
+    bottom: 0;
+    background-image: repeating-linear-gradient(
+        to right,
+        transparent,
+        transparent 39px,
+        var(--vertical-line-color) 40px
+    );
+    z-index: 0;
+}
+
 .horizontal-lines {
     position: absolute;
     top: 0;
@@ -114,4 +130,12 @@ button:hover {
         margin: 0;
         border-radius: 0;
     }
+}
+
+@font-face {
+    font-family: 'CustomFont';
+    src: url('custom-font.woff2') format('woff2'),
+         url('custom-font.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
