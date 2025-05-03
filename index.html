@@ -18,7 +18,10 @@
                     <option value="'Kalam', cursive">Kalam</option>
                     <option value="'Pacifico', cursive">Pacifico</option>
                     <option value="'Courier New', monospace">Typewriter</option>
+                    <option value="'CustomFont', cursive">Custom Font</option>
                 </select>
+                <input type="file" id="font-upload" accept=".ttf,.otf,.woff,.woff2" style="display: none;">
+                <button id="upload-font-btn">Upload Font</button>
             </div>
             <div class="tool-group">
                 <label for="pen-color">Pen Color:</label>
@@ -26,7 +29,8 @@
             </div>
             <div class="tool-group">
                 <label for="pen-size">Pen Size:</label>
-                <input type="range" id="pen-size" min="1" max="10" value="3">
+                <input type="range" id="pen-size" min="1" max="20" value="5">
+                <span id="pen-size-value">5px</span>
             </div>
             <button id="clear-btn">Clear Page</button>
             <button id="print-btn">Print Page</button>
@@ -34,6 +38,7 @@
         
         <div class="notebook-paper">
             <div class="margin-line"></div>
+            <div class="vertical-lines"></div>
             <div class="horizontal-lines"></div>
             <div class="content" id="notebook-content" contenteditable="true"></div>
         </div>
