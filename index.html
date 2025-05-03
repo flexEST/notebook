@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riyaziyyat Defteri - Digital Notebook</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="notebook-container">
+        <div class="toolbar">
+            <div class="tool-group">
+                <label for="font-select">Font:</label>
+                <select id="font-select">
+                    <option value="'Caveat', cursive">Caveat (Default)</option>
+                    <option value="'Dancing Script', cursive">Dancing Script</option>
+                    <option value="'Kalam', cursive">Kalam</option>
+                    <option value="'Pacifico', cursive">Pacifico</option>
+                    <option value="'Courier New', monospace">Typewriter</option>
+                </select>
+            </div>
+            <div class="tool-group">
+                <label for="pen-color">Pen Color:</label>
+                <input type="color" id="pen-color" value="#1a73e8">
+            </div>
+            <div class="tool-group">
+                <label for="pen-size">Pen Size:</label>
+                <input type="range" id="pen-size" min="1" max="10" value="3">
+            </div>
+            <button id="clear-btn">Clear Page</button>
+            <button id="print-btn">Print Page</button>
+        </div>
+        
+        <div class="notebook-paper">
+            <div class="margin-line"></div>
+            <div class="horizontal-lines"></div>
+            <div class="content" id="notebook-content" contenteditable="true"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
